@@ -1,18 +1,24 @@
 <template>
   <div ref="workbook" class="workbook">
     <table>
-      <tr class="table-headers">
-        <th class="table-header"></th>
-        <!-- Empty cell for the corner -->
-        <th class="table-header" v-for="col in 20" :key="col">
+      <tr class="table-row table-row-headers">
+        <th class="table-header table-header-cornerCell"></th>
+        <th
+          class="table-header table-header-column"
+          v-for="col in 20"
+          :key="col"
+        >
           {{ getColumnName(col) }}
         </th>
       </tr>
-      <tr v-for="row in rows" :key="row">
+      <tr class="table-row" v-for="row in rows" :key="row">
         <th>{{ row }}</th>
-        <!-- Row Header -->
-        <td v-for="col in 20" :key="col">
-          <input type="text" v-model="cellContents[`${row}-${col}`]" />
+        <!-- Row Number -->
+        <td class="table-cell" v-for="col in 20" :key="col">
+          <Cell
+            :initialContent="cellContents[`${row}-${col}`]"
+            @updateContent="updateCellContent($event, row, col)"
+          />
         </td>
       </tr>
     </table>
@@ -20,16 +26,18 @@
 </template>
 
 <script>
+import Cell from "./Cell.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
+  components: { Cell },
   setup() {
     const workbook = ref(null);
-    const rows = ref(Array.from({ length: 100 }, (_, i) => i + 1));
     const cellContents = ref({});
+    const rows = ref(Array.from({ length: 100 }, (_, i) => i + 1)); //Initializing an array with the length of 100
 
     function getColumnName(col) {
-      return String.fromCharCode(64 + col); // ASCII 65 is 'A'
+      return String.fromCharCode(64 + col); //Using ASCII to convert nums to letters
     }
 
     function addMoreRows() {
@@ -46,6 +54,9 @@ export default {
         }
       }
     }
+    const updateCellContent = (newContent, row, col) => {
+      cellContents.value[`${row}-${col}`] = newContent;
+    };
 
     onMounted(() => {
       if (workbook.value) {
@@ -59,7 +70,7 @@ export default {
       }
     });
 
-    return { workbook, rows, cellContents, getColumnName };
+    return { workbook, rows, cellContents, getColumnName, updateCellContent };
   },
 };
 </script>

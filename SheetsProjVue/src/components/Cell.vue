@@ -1,5 +1,5 @@
 <template>
-  <input id="cell" type="text" v-model="content" />
+  <input class="cell-input" type="text" v-model="content" />
 </template>
 
 <script>
@@ -27,7 +27,7 @@ export default {
 </script>
 
 <style scoped>
-#cell {
+.cell-input {
   width: 6vw;
 }
 </style>
