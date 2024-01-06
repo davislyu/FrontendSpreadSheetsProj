@@ -1,3 +1,4 @@
+//Workbook.vue
 <template>
   <div ref="workbook" class="workbook">
     <table>
@@ -25,19 +26,24 @@
   </div>
 </template>
 
+<!-- Workbook.vue -->
 <script>
 import Cell from "./Cell.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
   components: { Cell },
-  setup() {
+  props: {
+    cellContents: Object,
+    rows: Array,
+    currentTabId: Number,
+  },
+
+  setup(props) {
     const workbook = ref(null);
-    const cellContents = ref({});
-    const rows = ref(Array.from({ length: 100 }, (_, i) => i + 1)); //Initializing an array with the length of 100
 
     function getColumnName(col) {
-      return String.fromCharCode(64 + col); //Using ASCII to convert nums to letters
+      return String.fromCharCode(64 + col); // Convert numbers to letters
     }
 
     function addMoreRows() {
@@ -47,15 +53,17 @@ export default {
           element.scrollHeight - element.scrollTop <=
           element.clientHeight + 100
         ) {
-          const currentRowCount = rows.value.length;
-          rows.value.push(
+          const currentRowCount = props.rows.length;
+          props.rows.push(
             ...Array.from({ length: 10 }, (_, i) => currentRowCount + i + 1)
           );
         }
       }
     }
+
     const updateCellContent = (newContent, row, col) => {
-      cellContents.value[`${row}-${col}`] = newContent;
+      props.cellContents[`${row}-${col}`] = newContent;
+      console.log(props.cellContents);
     };
 
     onMounted(() => {
@@ -70,27 +78,26 @@ export default {
       }
     });
 
-    return { workbook, rows, cellContents, getColumnName, updateCellContent };
+    return { workbook, getColumnName, updateCellContent };
   },
 };
 </script>
 
-<style scoped>
-.workbook {
-  overflow-y: auto;
-  height: 100vh;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
+<style scoped lang="sass">
+.workbook
+  overflow-y: auto
+  height: 100vh
+
+table
+  width: 100%
+  border-collapse: collapse
+
 th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  text-align: center;
-}
-.table-header {
-  background-color: #f0f0f0;
-}
+td
+  border: 1px solid #ddd
+  padding: 8px
+  text-align: center
+
+.table-header
+  background-color: #f0f0f0
 </style>
