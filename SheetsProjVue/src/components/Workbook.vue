@@ -17,8 +17,8 @@
         <!-- Row Number -->
         <td class="table-cell" v-for="col in 20" :key="col">
           <Cell
-            :initialContent="cellContents[`${row}-${col}`]"
-            @updateContent="updateCellContent($event, row, col)"
+            :initialContent="cellContents[`${row}-${getColumnName(col)}`]"
+            @updateContent="updateCellContent($event, row, getColumnName(col))"
           />
         </td>
       </tr>
