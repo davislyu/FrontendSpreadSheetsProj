@@ -1,12 +1,13 @@
+//App.vue
 <template>
   <div class="main">
-    <mainView />
+    <MainView />
   </div>
 </template>
 <script>
-import mainView from "./components/Workbook.vue";
+import MainView from "./components/MainView.vue";
 export default {
-  components: { mainView },
+  components: { MainView },
 };
 </script>
 <style scoped>
