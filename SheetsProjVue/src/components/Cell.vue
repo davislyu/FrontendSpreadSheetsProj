@@ -1,6 +1,6 @@
 //Cell.vue
 <template>
-  <input class="cell-input" type="text" v-model="content" />
+  <textarea class="cell-input" type="text" v-model="content" />
 </template>
 
 <script>
@@ -31,9 +31,13 @@ export default {
 </script>
 
 <style scoped lang="sass">
+
 .cell-input
   width: 6vw
   border: none
+  resize: none
+
+
   &:focus
     outline: none
 </style>
