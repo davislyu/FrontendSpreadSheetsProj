@@ -1,3 +1,4 @@
+//Cell.vue
 <template>
   <input class="cell-input" type="text" v-model="content" />
 </template>
@@ -13,14 +14,17 @@ export default {
       content: this.initialContent,
     };
   },
+  watch: {
+    initialContent(newValue) {
+      this.content = newValue;
+    },
+    content() {
+      this.updateContent();
+    },
+  },
   methods: {
     updateContent() {
       this.$emit("updateContent", this.content);
-    },
-  },
-  watch: {
-    content() {
-      this.updateContent();
     },
   },
 };
