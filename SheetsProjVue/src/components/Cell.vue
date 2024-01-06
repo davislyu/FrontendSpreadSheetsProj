@@ -30,8 +30,10 @@ export default {
 };
 </script>
 
-<style scoped>
-.cell-input {
-  width: 6vw;
-}
+<style scoped lang="sass">
+.cell-input
+  width: 6vw
+  border: none
+  &:focus
+    outline: none
 </style>
