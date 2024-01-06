@@ -1,16 +1,24 @@
+//workbookTabs.vue
 <template>
-  <div class="tabs-container">
-    <ul class="tabs-list">
-      <li
-        v-for="tab in tabs"
-        :key="tab.id"
-        :class="{ active: tab.id === activeTabId }"
-        @click="() => setActiveTab(tab.id)"
-      >
-        Tab {{ tab.id }}
-      </li>
-      <button @click="addTab">+</button>
-    </ul>
+  <div class="main-container">
+    <div>
+      <button @click="toggleActiveTabStatus">
+        {{ tabsActive ? "Hide tabs" : "Open tabs" }}
+      </button>
+    </div>
+    <div v-if="tabsActive" class="tabs-container">
+      <ul class="tabs-list">
+        <li
+          v-for="tab in tabs"
+          :key="tab.id"
+          :class="{ active: tab.id === activeTabId }"
+          @click="() => setActiveTab(tab.id)"
+        >
+          Tab {{ tab.id }}
+        </li>
+        <button @click="addTab">+</button>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -23,11 +31,16 @@ export default defineComponent({
   },
   setup(props, { emit }) {
     const activeTabId = ref(props.tabs[0].id);
+    const tabsActive = ref(true);
 
     const addTab = () => {
       const newTabId = props.tabs[props.tabs.length - 1].id + 1;
       emit("addNewTab", newTabId);
       setActiveTab(newTabId);
+    };
+
+    const toggleActiveTabStatus = () => {
+      tabsActive.value = !tabsActive.value;
     };
 
     const setActiveTab = (tabId) => {
@@ -48,12 +61,14 @@ export default defineComponent({
       activeTabId,
       setActiveTab,
       addTab,
+      tabsActive,
+      toggleActiveTabStatus,
     };
   },
 });
 </script>
 
-<style lang="sass">
+<style scoped lang="sass">
 .tabs-list
   display: flex
   gap: 1rem
@@ -61,6 +76,17 @@ export default defineComponent({
     list-style: none
     &:hover
       cursor: pointer
+  button
+    border: none
+    background-color: transparent
+    font-size: 1rem
+    &:hover
+        cursor: pointer
   .active
-    color: red
+    text-decoration: underline
+.main-container
+    display: flex
+    align-items: center
+    padding: 0
+    margin: 0
 </style>
