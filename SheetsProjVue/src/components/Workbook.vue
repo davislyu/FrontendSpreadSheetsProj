@@ -43,7 +43,7 @@ export default {
     const workbook = ref(null);
 
     function getColumnName(col) {
-      return String.fromCharCode(64 + col); // Convert numbers to letters
+      return String.fromCharCode(64 + col); // Convert numbers to letters using ASCII
     }
 
     function addMoreRows() {
