@@ -1,16 +1,13 @@
-//MainView.vue
 <template>
   <div>
     <WorkbookTabs
       :tabs="tabs"
-      :activeTabId="activeTabId"
-      @tabChange="setActiveTab"
+      @tabChanged="handleTabChange"
+      @addNewTab="addTab"
     />
     <Workbook
-      :cellData="activeTabData.cellContents"
-      :rows="rows"
-      :columns="columns"
-      @cellUpdate="handleCellUpdate"
+      :rows="activeTabData.rows"
+      :cellContents="activeTabData.cellContents"
     />
   </div>
 </template>
@@ -18,33 +15,51 @@
 <script>
 import WorkbookTabs from "./WorkbookTabs.vue";
 import Workbook from "./Workbook.vue";
+import { ref, reactive } from "vue";
 
 export default {
-  components: { WorkbookTabs, Workbook },
-  data() {
-    return {
-      tabs: [{ id: 1, cellContents: {} }],
-      activeTabId: 1,
-      rows: Array.from({ length: 100 }, (_, i) => i + 1),
-      columns: 20,
-    };
+  components: {
+    WorkbookTabs,
+    Workbook,
   },
-  computed: {
-    activeTabData() {
-      return this.tabs.find((tab) => tab.id === this.activeTabId) || {}; // Finds the active tab and returns it.
-    },
-  },
-  methods: {
-    setActiveTab(tabId) {
-      this.activeTabId = tabId; //Gets the emit with the TabId and sets its as the activeTabId.
-    },
+  setup() {
+    const tabs = reactive([
+      {
+        id: 1,
+        rows: Array.from({ length: 100 }, (_, i) => i + 1),
+        cellContents: {},
+      },
+      {
+        id: 2,
+        rows: Array.from({ length: 100 }, (_, i) => i + 1),
+        cellContents: {},
+      },
+    ]);
+    const activeTabData = ref(tabs[0]);
 
-    handleCellUpdate({ row, col, content }) {
-      this.activeTabData.cellContents[`${row}-${col}`] = content;
-      console.log(content);
-    },
+    function addTab(newTabId) {
+      const newTab = {
+        id: newTabId,
+        rows: Array.from({ length: 100 }, (_, i) => i + 1),
+        cellContents: {},
+      };
+      tabs.push(newTab);
+      activeTabData.value = newTab;
+    }
+
+    function handleTabChange(tabId) {
+      const newActiveTab = tabs.find((tab) => tab.id === tabId);
+      if (newActiveTab) {
+        activeTabData.value = newActiveTab;
+      }
+    }
+
+    return {
+      tabs,
+      activeTabData,
+      handleTabChange,
+      addTab,
+    };
   },
 };
 </script>
-
-<!-- Add any necessary styles -->
