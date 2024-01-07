@@ -1,43 +1,22 @@
-//Cell.vue
+/Cell.vue
 <template>
-  <textarea class="cell-input" type="text" v-model="content" />
+  <textarea
+    class="cell-input"
+    :value="content"
+    @input="$emit('updateContent', $event.target.value)"
+  />
 </template>
 
 <script>
 export default {
-  name: "Cell",
-  props: {
-    initialContent: String,
-  },
-  data() {
-    return {
-      content: this.initialContent,
-    };
-  },
-  watch: {
-    initialContent(newValue) {
-      this.content = newValue;
-    },
-    content() {
-      this.updateContent();
-    },
-  },
-  methods: {
-    updateContent() {
-      this.$emit("updateContent", this.content);
-    },
-  },
+  props: ["content"],
 };
 </script>
-
-<style scoped lang="sass">
-
+<style lang="sass">
 .cell-input
-  width: 6vw
-  border: none
+  width: 8vw
   resize: none
-
-
+  border: none
   &:focus
     outline: none
 </style>
