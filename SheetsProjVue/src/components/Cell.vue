@@ -4,6 +4,7 @@
     class="cell-input"
     :value="content"
     @input="$emit('updateContent', $event.target.value)"
+    @focus="$emit('focus')"
   />
 </template>
 

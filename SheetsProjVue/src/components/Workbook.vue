@@ -5,14 +5,24 @@
     <table>
       <tr>
         <th></th>
-        <th v-for="col in columns" :key="col">{{ getColumnName(col) }}</th>
+        <th
+          class="col-header"
+          v-for="col in columns"
+          :key="col"
+          :class="{ 'focused-header': isHeaderFocused(null, col) }"
+        >
+          {{ getColumnName(col) }}
+        </th>
       </tr>
       <tr v-for="row in rows" :key="row">
-        <th>{{ row }}</th>
+        <th :class="{ 'focused-header': isHeaderFocused(row, null) }">
+          {{ row }}
+        </th>
         <td v-for="col in columns" :key="col">
           <Cell
             :content="getCellContent(row, col)"
             @updateContent="updateCell(row, col, $event)"
+            @focus="setFocusedCell(row, col)"
           />
         </td>
       </tr>
@@ -25,6 +35,11 @@ import Cell from "./Cell.vue";
 
 export default {
   components: { Cell },
+  data() {
+    return {
+      focusedCell: null,
+    };
+  },
   props: ["cellData", "rows", "columns"],
   mounted() {
     this.loadMoreRows();
@@ -51,6 +66,17 @@ export default {
         this.rows.push(maxRow + i);
       }
     },
+    setFocusedCell(row, col) {
+      this.focusedCell = `${row}-${col}`;
+    },
+    isHeaderFocused(row, col) {
+      if (!this.focusedCell) return false;
+      const [focusedRow, focusedCol] = this.focusedCell.split("-");
+      return (
+        (row && focusedRow === row.toString()) ||
+        (col && focusedCol === col.toString())
+      );
+    },
   },
 };
 </script>
@@ -63,11 +89,15 @@ table
   width: 100%
   border-collapse: collapse
 
+
 th,
 td
   border: 1px solid #ddd
-  padding: 8px
+  padding:0.2rem
   text-align: center
+.focused-header
+  background-color:#deeaee
+
 
 .table-header
   background-color: #f0f0f0
