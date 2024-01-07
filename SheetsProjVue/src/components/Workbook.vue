@@ -1,24 +1,18 @@
 //Workbook.vue
+
 <template>
-  <div ref="workbook" class="workbook">
+  <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table>
-      <tr class="table-row table-row-headers">
-        <th class="table-header table-header-cornerCell"></th>
-        <th
-          class="table-header table-header-column"
-          v-for="col in 20"
-          :key="col"
-        >
-          {{ getColumnName(col) }}
-        </th>
+      <tr>
+        <th></th>
+        <th v-for="col in columns" :key="col">{{ getColumnName(col) }}</th>
       </tr>
-      <tr class="table-row" v-for="row in rows" :key="row">
+      <tr v-for="row in rows" :key="row">
         <th>{{ row }}</th>
-        <!-- Row Number -->
-        <td class="table-cell" v-for="col in 20" :key="col">
+        <td v-for="col in columns" :key="col">
           <Cell
-            :initialContent="cellContents[`${row}-${getColumnName(col)}`]"
-            @updateContent="updateCellContent($event, row, getColumnName(col))"
+            :content="getCellContent(row, col)"
+            @updateContent="updateCell(row, col, $event)"
           />
         </td>
       </tr>
@@ -26,66 +20,43 @@
   </div>
 </template>
 
-<!-- Workbook.vue -->
 <script>
 import Cell from "./Cell.vue";
-import { ref, onMounted, onUnmounted } from "vue";
 
 export default {
   components: { Cell },
-  props: {
-    cellContents: Object,
-    rows: Array,
-    currentTabId: Number,
+  props: ["cellData", "rows", "columns"],
+  mounted() {
+    this.loadMoreRows();
   },
-
-  setup(props) {
-    const workbook = ref(null);
-
-    function getColumnName(col) {
-      return String.fromCharCode(64 + col); // Convert numbers to letters using ASCII
-    }
-
-    function addMoreRows() {
-      if (workbook.value) {
-        const element = workbook.value;
-        if (
-          element.scrollHeight - element.scrollTop <=
-          element.clientHeight + 100
-        ) {
-          const currentRowCount = props.rows.length;
-          props.rows.push(
-            ...Array.from({ length: 10 }, (_, i) => currentRowCount + i + 1)
-          );
-        }
+  methods: {
+    getColumnName(col) {
+      return String.fromCharCode(64 + col);
+    },
+    getCellContent(row, col) {
+      return this.cellData[`${row}-${col}`] || "";
+    },
+    updateCell(row, col, content) {
+      this.$emit("cellUpdate", { row, col, content });
+    },
+    checkScroll() {
+      const { scrollTop, scrollHeight, clientHeight } = this.$refs.workbook;
+      if (scrollTop + clientHeight >= scrollHeight - 100) {
+        this.loadMoreRows();
       }
-    }
-
-    const updateCellContent = (newContent, row, col) => {
-      props.cellContents[`${row}-${col}`] = newContent;
-      console.log(props.cellContents);
-    };
-
-    onMounted(() => {
-      if (workbook.value) {
-        workbook.value.addEventListener("scroll", addMoreRows);
+    },
+    loadMoreRows() {
+      let maxRow = this.rows.length;
+      for (let i = 1; i <= 10; i++) {
+        this.rows.push(maxRow + i);
       }
-    });
-
-    onUnmounted(() => {
-      if (workbook.value) {
-        workbook.value.removeEventListener("scroll", addMoreRows);
-      }
-    });
-
-    return { workbook, getColumnName, updateCellContent };
+    },
   },
 };
 </script>
-
 <style scoped lang="sass">
 .workbook
-  overflow-y: auto
+  overflow-x: auto
   height: 100vh
 
 table
