@@ -15,7 +15,9 @@ export default {
 </script>
 <style lang="sass">
 .cell-input
+  font-family: "Poppins", sans-serif
   width: 8vw
+  font-size: 1rem
   resize: none
   border: none
   &:focus
