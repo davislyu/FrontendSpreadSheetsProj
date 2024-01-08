@@ -18,6 +18,7 @@
 export default {
   props: ["tabs", "activeTabId"],
   emits: ["tabChange"],
+
   methods: {
     setActiveTab(tabId) {
       this.$emit("tabChange", tabId);
@@ -37,6 +38,14 @@ export default {
     list-style: none
     display: flex
     gap: 1rem
+    button
+      background-color: transparent
+      background-repeat: no-repeat
+      border: none
+      cursor: pointer
+      overflow: hidden
+      outline: none
+      font-size: 1rem
     li:hover,button:hover
         cursor: pointer
 </style>
