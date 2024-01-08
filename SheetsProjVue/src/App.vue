@@ -10,8 +10,9 @@ export default {
   components: { MainView },
 };
 </script>
-<style scoped>
+<style>
 .main {
   height: 100vh; /* Ensure the parent container takes full height */
+  font-family: "Poppins", sans-serif;
 }
 </style>
