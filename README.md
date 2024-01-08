@@ -3,7 +3,7 @@
 # Vue Spreadsheet Application
 
 ### Hello there! 👋 
-Welcome to our Vue Spreadsheet Application project. 
+Welcome to the Vue Spreadsheet Application project. 
 This is a sleek, user-friendly web app built using Vue.js, providing you with a dynamic spreadsheet experience. It's perfect for anyone who needs to manage and organize data in a tabular format, without the hassle of complex software.
 
 ### 🚀 Features
