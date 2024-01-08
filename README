@@ -28,6 +28,7 @@ This is a sleek, user-friendly web app built using Vue.js, providing you with a 
 
 ### 🏃🏼 How to run
 ```
+cd SheetsProjVue/
 npm install
 npm run dev 
 ```
