@@ -1,0 +1,58 @@
+@import "config";
+
+.workbook {
+  overflow-x: auto;
+  height: 100vh;
+
+  &-table {
+    width: 100%;
+    border-spacing: 0;
+
+    .row-header-cell,
+    .table-header-cell {
+      border: 1px solid $primary--header-border-color;
+      color: $primary--header-text-color;
+      font-size: $primary--header-font-size;
+      line-height: $primary--header-line-height;
+      letter-spacing: $primary--header-letter-spacing;
+      height: 28px;
+      font-family: $primary--font-family;
+      font-weight: 400;
+    }
+    .table-header-cell {
+      padding: 6px 4px;
+      box-sizing: border-box;
+      border-top: 2px solid $primary--header-border-color;
+    }
+
+    .row-header-cell {
+      width: 32px;
+      height: 12px;
+      padding: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-self: stretch;
+    }
+    .active-header-cell {
+      background-color: $focused--header-background-color;
+      border: 1px solid $focused--header-border-color;
+    }
+    .cell-container {
+      box-sizing: border-box;
+      border: 1px solid $primary--border-color;
+      background-color: $primary--background-color;
+      color: $primary--cell-text-color;
+      height: $primary--cell-height;
+      font-size: $primary--cell-font-size;
+      font-family: $primary--font-family;
+      line-height: $primary--line-height;
+      letter-spacing: $primary--letter-spacing;
+      padding: 6px 0px 6px 8px;
+
+      &-focused {
+        border: 1px solid $focused--border-color;
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "SourceSansPro";
+  src: url("./source-sans-pro.regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+//Cell
+$primary--border-color: #e5ebed; //implanted
+$primary--background-color: white; //implanted
+$focused--border-color: #0c7ba1; //implanted
+$primary--cell-text-color: #01151c; //implanted
+$primary--cell-height: 28px; //implanted
+$primary--cell-font-size: 15px; //implanted
+$primary--font-family: "SourceSansPro", sans-serif;
+$primary--line-height: 24px; //implanted
+$primary--paragraph-spacing: 12px; //Ask bella
+$primary--letter-spacing: -0.25%; //implanted
+//
+
+//Table Head
+$focused--header-background-color: #dce8ea; //implanted
+$primary--header-border-color: #e5ebed; //implanted
+$focused--header-border-color: #0c7ba1; //implanted
+$primary--header-text-color: #667579; //implanted
+$primary--header-font-size: 14px; //implanted
+$primary--header-line-height: 20px; //implanted
+$primary--header-paragraph-spacing: 12px; //Ask bella
+$primary--header-letter-spacing: 0%; //implanted
+//

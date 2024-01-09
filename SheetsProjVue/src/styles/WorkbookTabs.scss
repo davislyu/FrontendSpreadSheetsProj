@@ -1,0 +1,31 @@
+.active {
+  text-decoration: underline;
+}
+
+.tab-navigation-list {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+
+  li {
+    font-size: 1.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .add-tab-button {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+    font-size: 1.5rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
