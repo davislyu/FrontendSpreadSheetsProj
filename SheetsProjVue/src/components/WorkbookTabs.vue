@@ -1,6 +1,6 @@
 <template>
-  <div class="tabs-container">
-    <ul class="tabs-list">
+  <div class="tab-navigation-container">
+    <ul class="tab-navigation-list">
       <li
         v-for="tab in tabs"
         :key="tab.id"
@@ -9,7 +9,9 @@
       >
         Tab {{ tab.id }}
       </li>
-      <button @click="addTab">+</button>
+      <button @click="addTab" class="add-tab-button">
+        <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
+      </button>
     </ul>
   </div>
 </template>
@@ -31,21 +33,7 @@ export default {
   },
 };
 </script>
-<style scoped lang="sass">
-.active
-  text-decoration: underline
-.tabs-list
-    list-style: none
-    display: flex
-    gap: 1rem
-    button
-      background-color: transparent
-      background-repeat: no-repeat
-      border: none
-      cursor: pointer
-      overflow: hidden
-      outline: none
-      font-size: 1rem
-    li:hover,button:hover
-        cursor: pointer
+
+<style scoped lang="scss">
+@import "../styles/WorkbookTabs.scss";
 </style>

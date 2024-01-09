@@ -23,7 +23,11 @@ export default {
   components: { WorkbookTabs, Workbook },
   data() {
     return {
-      tabs: [{ id: 1, cellContents: {} }],
+      tabs: [
+        { id: 1, cellContents: {} },
+        { id: 2, cellContents: {} },
+        { id: 3, cellContents: {} },
+      ],
       activeTabId: 1,
       rows: Array.from({ length: 100 }, (_, i) => i + 1),
       columns: 20,
@@ -46,3 +50,9 @@ export default {
   },
 };
 </script>
+<style>
+* {
+  padding: 0;
+  margin: 0;
+}
+</style>

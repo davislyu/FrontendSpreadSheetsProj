@@ -1,6 +1,6 @@
 /Cell.vue
 <template>
-  <textarea
+  <input
     class="cell-input"
     :value="content"
     @input="$emit('updateContent', $event.target.value)"
@@ -13,13 +13,6 @@ export default {
   props: ["content"],
 };
 </script>
-<style lang="sass">
-.cell-input
-  font-family: "Poppins", sans-serif
-  width: 8vw
-  font-size: 1rem
-  resize: none
-  border: none
-  &:focus
-    outline: none
+<style lang="scss">
+@import "../styles/Cell.scss";
 </style>

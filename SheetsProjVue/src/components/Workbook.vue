@@ -1,24 +1,32 @@
 //Workbook.vue
 
 <template>
-  <div ref="workbook" class="workbook" @scroll="checkScroll">
-    <table>
-      <tr>
-        <th></th>
+  <div ref="workbook" class="workbook-container" @scroll="checkScroll">
+    <table class="workbook-table">
+      <tr class="table-header-row">
+        <th class="table-header-corner-cell"></th>
         <th
-          class="col-header"
+          class="table-header-cell"
           v-for="col in columns"
           :key="col"
-          :class="{ 'focused-header': isHeaderFocused(null, col) }"
+          :class="{ 'active-header-cell': isHeaderFocused(null, col) }"
         >
           {{ getColumnName(col) }}
         </th>
       </tr>
-      <tr v-for="row in rows" :key="row">
-        <th :class="{ 'focused-header': isHeaderFocused(row, null) }">
-          {{ row }}
+      <tr v-for="row in rows" :key="row" class="table-row">
+        <th
+          class="row-header-cell"
+          :class="{ 'active-header-cell': isHeaderFocused(row, null) }"
+        >
+          <p class="row-header-label">{{ row }}</p>
         </th>
-        <td v-for="col in columns" :key="col">
+        <td
+          v-for="col in columns"
+          :key="col"
+          class="cell-container"
+          :class="{ 'cell-container-focused': isCellFocused(row, col) }"
+        >
           <Cell
             :content="getCellContent(row, col)"
             @updateContent="updateCell(row, col, $event)"
@@ -60,6 +68,9 @@ export default {
         this.loadMoreRows();
       }
     },
+    isCellFocused(row, col) {
+      return this.focusedCell === `${row}-${col}`;
+    },
     loadMoreRows() {
       let maxRow = this.rows.length;
       for (let i = 1; i <= 10; i++) {
@@ -80,25 +91,6 @@ export default {
   },
 };
 </script>
-<style scoped lang="sass">
-.workbook
-  overflow-x: auto
-  height: 100vh
-
-table
-  width: 100%
-  border-collapse: collapse
-
-
-th,
-td
-  border: 1px solid #ddd
-  padding:0.2rem
-  text-align: center
-.focused-header
-  background-color:#deeaee
-
-
-.table-header
-  background-color: #f0f0f0
+<style lang="scss">
+@import "../styles/Workbook.scss";
 </style>
