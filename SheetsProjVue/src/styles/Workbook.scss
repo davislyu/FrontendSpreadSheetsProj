@@ -19,13 +19,9 @@
       font-family: $primary--font-family;
       font-weight: 400;
     }
-    .table-header-cell {
-      padding: 6px 4px;
-      box-sizing: border-box;
-      border-top: 2px solid $primary--header-border-color;
-    }
 
-    .row-header-cell {
+    .row-header-cell,
+    .table-header-corner-cell {
       width: 32px;
       height: 12px;
       padding: 8px;
