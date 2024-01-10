@@ -4,7 +4,7 @@
   <div ref="workbook" class="workbook-container" @scroll="checkScroll">
     <table class="workbook-table">
       <tr class="table-header-row">
-        <th class="table-header-corner-cell"></th>
+        <th class="table-header-cell"></th>
         <th
           class="table-header-cell"
           v-for="col in columns"
