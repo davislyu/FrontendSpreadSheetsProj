@@ -1,20 +1,19 @@
-.active {
-  text-decoration: underline;
-}
+@import "config";
 
-.tab-navigation-list {
-  list-style: none;
+.tab-navigation-container {
+  background-color: $focused--header-background-color;
   display: flex;
-  gap: 1rem;
-
-  li {
-    font-size: 1.5rem;
-
+  align-items: center;
+  font-size: 15px;
+  height: 36px;
+  .tab-icon {
+    width: 20px;
+    height: 20px;
+    padding: 4px;
     &:hover {
       cursor: pointer;
     }
   }
-
   .add-tab-button {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -22,10 +21,46 @@
     cursor: pointer;
     overflow: hidden;
     outline: none;
-    font-size: 1.5rem;
+    margin-left: 12px;
+  }
+  .burger-icon {
+    margin-left: 20px;
+  }
+}
+.tab-navigation-container .active {
+  color: $primary--cell-text-color;
+  background-color: $primary--background-color;
+}
 
+.tab-navigation-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  li {
+    font-size: 15px;
+    color: $primary--header-text-color;
+    font-family: $primary--font-family;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: -0.037px;
+    width: 47px;
+    height: 24px;
+    padding: 6px 16px;
+    border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    text-align: center;
     &:hover {
       cursor: pointer;
+    }
+    &:hover:not(.active) {
+      background-color: rgba(
+        255,
+        255,
+        255,
+        0.457
+      ); // or use a variable for the color if you prefer
     }
   }
 }
