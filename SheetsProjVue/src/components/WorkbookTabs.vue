@@ -1,6 +1,12 @@
 <template>
   <div class="tab-navigation-container">
-    <ul class="tab-navigation-list">
+    <font-awesome-icon
+      @click="toggleTabs"
+      class="tab-icon burger-icon"
+      icon="fa-solid fa-bars"
+    />
+
+    <ul v-if="tabsActive" class="tab-navigation-list">
       <li
         v-for="tab in tabs"
         :key="tab.id"
@@ -9,10 +15,10 @@
       >
         Tab {{ tab.id }}
       </li>
-      <button @click="addTab" class="add-tab-button">
-        <font-awesome-icon icon="fa-solid fa-file-circle-plus" />
-      </button>
     </ul>
+    <button @click="addTab" class="add-tab-button">
+      <font-awesome-icon class="tab-icon plus-icon" icon="fa-solid fa-plus" />
+    </button>
   </div>
 </template>
 
@@ -20,6 +26,11 @@
 export default {
   props: ["tabs", "activeTabId"],
   emits: ["tabChange"],
+  data() {
+    return {
+      tabsActive: true,
+    };
+  },
 
   methods: {
     setActiveTab(tabId) {
@@ -29,6 +40,10 @@ export default {
       const newTabId = this.tabs.length + 1;
       this.tabs.push({ id: newTabId, cellContents: {} });
       this.setActiveTab(newTabId);
+      this.tabsActive = true;
+    },
+    toggleTabs() {
+      this.tabsActive = !this.tabsActive;
     },
   },
 };
