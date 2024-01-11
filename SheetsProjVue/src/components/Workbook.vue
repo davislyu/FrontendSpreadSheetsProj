@@ -1,10 +1,8 @@
-//Workbook.vue
-
 <template>
   <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table class="workbook-table">
       <tr class="table-header-row">
-        <th class="table-header-cell"></th>
+        <th id="corner-cell" class="table-header-cell"></th>
         <th
           class="table-header-cell"
           v-for="col in columns"
@@ -56,6 +54,7 @@ export default {
     getColumnName(col) {
       return String.fromCharCode(64 + col);
     },
+
     getCellContent(row, col) {
       return this.cellData[`${row}-${col}`] || "";
     },
@@ -68,6 +67,7 @@ export default {
         this.loadMoreRows();
       }
     },
+
     isCellFocused(row, col) {
       return this.focusedCell === `${row}-${col}`;
     },
@@ -91,6 +91,7 @@ export default {
   },
 };
 </script>
+
 <style lang="scss">
 @import "../styles/Workbook.scss";
 </style>
