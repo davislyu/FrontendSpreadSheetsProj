@@ -1,7 +1,7 @@
 //Workbook.vue
 
 <template>
-  <div ref="workbook" class="workbook-container" @scroll="checkScroll">
+  <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table class="workbook-table">
       <tr class="table-header-row">
         <th class="table-header-cell"></th>
