@@ -45,10 +45,12 @@
       line-height: $primary--line-height;
       letter-spacing: $primary--letter-spacing;
       padding: 6px 0px 6px 8px;
-
-      &-focused {
-        border: 1px solid $focused--border-color;
+      &:hover {
+        border: 1px solid #3e90ab68;
       }
+    }
+    .cell-container-focused {
+      border: 1px solid $focused--header-border-color !important; //added the important so it will overwrite the hovered color
     }
   }
 }
