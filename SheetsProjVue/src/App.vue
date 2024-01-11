@@ -12,7 +12,7 @@ export default {
 </script>
 <style>
 .main {
-  height: 100vh; /* Ensure the parent container takes full height */
-  font-family: "Poppins", sans-serif;
+  height: 100vh;
+  overflow: hidden;
 }
 </style>
