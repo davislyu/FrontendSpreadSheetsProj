@@ -1,14 +1,16 @@
 @import "config";
 
 .tab-navigation-container {
-  background-color: $focused--header-background-color;
+  background-color: $primary--border-color;
   display: flex;
   align-items: center;
   font-size: 15px;
   height: 36px;
+  width: 100%;
+
   .tab-icon {
-    width: 20px;
-    height: 20px;
+    width: 16px;
+    height: 16px;
     padding: 4px;
     &:hover {
       cursor: pointer;
@@ -40,11 +42,12 @@
   li {
     font-size: 15px;
     color: $primary--header-text-color;
-    font-family: $primary--font-family;
     font-style: normal;
     font-weight: 400;
     line-height: 24px;
     letter-spacing: -0.037px;
+    font-family: $primary--font-family;
+
     width: 47px;
     height: 24px;
     padding: 6px 16px;
