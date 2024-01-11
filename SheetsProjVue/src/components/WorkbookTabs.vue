@@ -5,17 +5,18 @@
       class="tab-icon burger-icon"
       icon="fa-solid fa-bars"
     />
-
-    <ul v-if="tabsActive" class="tab-navigation-list">
-      <li
-        v-for="tab in tabs"
-        :key="tab.id"
-        :class="{ active: tab.id === activeTabId }"
-        @click="setActiveTab(tab.id)"
-      >
-        Tab {{ tab.id }}
-      </li>
-    </ul>
+    <Transition name="slide-fade">
+      <ul v-if="tabsActive" class="tab-navigation-list">
+        <li
+          v-for="tab in tabs"
+          :key="tab.id"
+          :class="{ active: tab.id === activeTabId }"
+          @click="setActiveTab(tab.id)"
+        >
+          Tab {{ tab.id }}
+        </li>
+      </ul>
+    </Transition>
     <button @click="addTab" class="add-tab-button">
       <font-awesome-icon class="tab-icon plus-icon" icon="fa-solid fa-plus" />
     </button>
@@ -31,7 +32,6 @@ export default {
       tabsActive: true,
     };
   },
-
   methods: {
     setActiveTab(tabId) {
       this.$emit("tabChange", tabId);
@@ -48,7 +48,19 @@ export default {
   },
 };
 </script>
-
 <style scoped lang="scss">
 @import "../styles/WorkbookTabs.scss";
+.slide-fade-enter-active {
+  transition: all 0.15s ease-out;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+  transform: translateX(-20px);
+  opacity: 0;
+}
 </style>
