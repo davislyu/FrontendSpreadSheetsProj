@@ -1,0 +1,58 @@
+@import "config";
+
+.header-container {
+  background-color: $primary--border-color;
+  height: 32px;
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-family: $primary--font-family;
+  .header-title-section {
+    gap: 12px;
+    display: flex;
+    align-items: center;
+    margin: 0px 20px;
+    .header-title-text {
+      border: none;
+      background-color: transparent;
+      height: 30px;
+      color: $primary--cell-text-color;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 32px;
+      letter-spacing: -0.1px;
+      padding: 0 8px;
+      width: auto;
+      outline: none;
+      &::placeholder {
+        color: $primary--cell-text-color;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 32px;
+        letter-spacing: -0.1px;
+      }
+      &:hover {
+        cursor: pointer;
+        border: 0.5px solid black;
+        border-radius: 5px;
+      }
+    }
+
+    .header-title-sheetsLogo {
+      img {
+        height: 24px;
+        width: 24px;
+        object-fit: contain;
+      }
+    }
+  }
+  .header-pfPic {
+    img {
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+    }
+  }
+}
