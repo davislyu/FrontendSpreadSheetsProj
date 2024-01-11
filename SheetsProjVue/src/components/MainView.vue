@@ -1,6 +1,7 @@
 /MainView.vue
 <template>
-  <div>
+  <div class="main-view-wrapper">
+    <Header />
     <WorkbookTabs
       :tabs="tabs"
       :activeTabId="activeTabId"
@@ -18,9 +19,10 @@
 <script>
 import WorkbookTabs from "./WorkbookTabs.vue";
 import Workbook from "./Workbook.vue";
+import Header from "./Header.vue";
 
 export default {
-  components: { WorkbookTabs, Workbook },
+  components: { WorkbookTabs, Workbook, Header },
   data() {
     return {
       tabs: [
@@ -54,5 +56,8 @@ export default {
 * {
   padding: 0;
   margin: 0;
+}
+.main-view-wrapper {
+  width: 100%;
 }
 </style>
