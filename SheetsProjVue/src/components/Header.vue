@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      inputSize: 1, // Initial size
+      inputSize: 1,
     };
   },
   methods: {
