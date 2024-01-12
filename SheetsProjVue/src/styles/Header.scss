@@ -13,7 +13,7 @@
     align-items: center;
     margin: 0px 20px;
     .header-title-text {
-      border: none;
+      border: 0.5px solid transparent;
       background-color: transparent;
       height: 30px;
       color: $primary--cell-text-color;
