@@ -38,7 +38,7 @@
 
 <script>
 import Cell from "./Cell.vue";
-
+import { eventBus } from "../eventBus";
 export default {
   components: { Cell },
   data() {
@@ -46,9 +46,13 @@ export default {
       focusedCell: null,
     };
   },
+
   props: ["cellData", "rows", "columns"],
   mounted() {
     this.loadMoreRows();
+    eventBus.on("tabChanged", () => {
+      this.focusedCell = null;
+    });
   },
   methods: {
     getColumnName(col) {
@@ -58,6 +62,7 @@ export default {
     getCellContent(row, col) {
       return this.cellData[`${row}-${col}`] || "";
     },
+
     updateCell(row, col, content) {
       this.$emit("cellUpdate", { row, col, content });
     },
@@ -79,7 +84,10 @@ export default {
     },
     setFocusedCell(row, col) {
       this.focusedCell = `${row}-${col}`;
+      eventBus.emit("focusedCellChange", this.focusedCell);
+      console.log(this.focusedCell);
     },
+
     isHeaderFocused(row, col) {
       if (!this.focusedCell) return false;
       const [focusedRow, focusedCol] = this.focusedCell.split("-");
