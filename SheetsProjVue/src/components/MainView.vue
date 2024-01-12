@@ -6,7 +6,10 @@
       :tabs="tabs"
       :activeTabId="activeTabId"
       @tabChange="setActiveTab"
+      @tabToDelete="delTab"
+      @addTab="addTab"
     />
+
     <Workbook
       :cellData="activeTabData.cellContents"
       :rows="rows"
@@ -31,6 +34,8 @@ export default {
         { id: 3, cellContents: {} },
       ],
       activeTabId: 1,
+      totalTabsAdded: 3,
+
       rows: Array.from({ length: 100 }, (_, i) => i + 1),
       columns: 20,
     };
@@ -41,8 +46,22 @@ export default {
     },
   },
   methods: {
+    addTab() {
+      this.totalTabsAdded++;
+      const newTabId = this.totalTabsAdded;
+      this.tabs.push({ id: newTabId, cellContents: {} });
+      this.setActiveTab(newTabId);
+    },
     setActiveTab(tabId) {
       this.activeTabId = tabId;
+    },
+    delTab(tabId) {
+      if (this.tabs.length > 1) {
+        this.tabs = this.tabs.filter((tab) => tab.id !== tabId);
+        if (this.activeTabId === tabId) {
+          this.activeTabId = this.tabs.length > 0 ? this.tabs[0].id : null;
+        }
+      }
     },
 
     handleCellUpdate({ row, col, content }) {
