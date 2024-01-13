@@ -1,3 +1,4 @@
+//workbook.scss
 @import "config";
 
 .workbook {
@@ -56,6 +57,7 @@
     }
     .cell-container {
       box-sizing: border-box;
+      min-width: 207px;
       border: 1px solid $primary--border-color;
       background-color: $primary--background-color;
       color: $primary--cell-text-color;
@@ -65,6 +67,7 @@
       line-height: $primary--line-height;
       letter-spacing: $primary--letter-spacing;
       padding: 6px 0px 6px 8px;
+
       &:hover {
         border: 1px solid #3e90ab68;
       }
