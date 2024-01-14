@@ -94,7 +94,8 @@ export default {
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-  transform: translateX(-20px);
+  transform: translateY(20px); //  transform: translateX(-20px);
+
   opacity: 0;
 }
 </style>
