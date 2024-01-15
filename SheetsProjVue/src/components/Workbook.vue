@@ -7,7 +7,9 @@
           class="table-header-cell"
           v-for="col in columns"
           :key="col"
-          :class="{ 'active-header-cell': isHeaderFocused(null, col) }"
+          :class="{
+            'active-header-cell': isHeaderFocused(getColumnName(col), null),
+          }"
         >
           {{ getColumnName(col) }}
         </th>
@@ -15,7 +17,7 @@
       <tr v-for="row in rows" :key="row" class="table-row">
         <th
           class="row-header-cell"
-          :class="{ 'active-header-cell': isHeaderFocused(row, null) }"
+          :class="{ 'active-header-cell': isHeaderFocused(null, row) }"
         >
           <p class="row-header-label">{{ row }}</p>
         </th>
@@ -23,12 +25,14 @@
           v-for="col in columns"
           :key="col"
           class="cell-container"
-          :class="{ 'cell-container-focused': isCellFocused(row, col) }"
+          :class="{
+            'cell-container-focused': isCellFocused(row, getColumnName(col)),
+          }"
         >
           <Cell
-            :content="getCellContent(row, col)"
-            @updateContent="updateCell(row, col, $event)"
-            @focus="setFocusedCell(row, col)"
+            :content="getCellContent(row, getColumnName(col))"
+            @updateContent="updateCell(row, getColumnName(col), $event)"
+            @focus="setFocusedCell(row, getColumnName(col))"
           />
         </td>
       </tr>
@@ -55,16 +59,21 @@ export default {
     });
   },
   methods: {
+    saveDataToLocalStorage() {
+      localStorage.setItem("workbookData", JSON.stringify(this.cellData));
+    },
     getColumnName(col) {
       return String.fromCharCode(64 + col);
     },
 
     getCellContent(row, col) {
-      return this.cellData[`${row}-${col}`] || "";
+      const key = `${col}${row}`;
+      return this.cellData[key] || "";
     },
 
     updateCell(row, col, content) {
-      this.$emit("cellUpdate", { row, col, content });
+      this.$emit("cellUpdate", { col, row, content });
+      this.saveDataToLocalStorage();
     },
     checkScroll() {
       const { scrollTop, scrollHeight, clientHeight } = this.$refs.workbook;
@@ -74,7 +83,7 @@ export default {
     },
 
     isCellFocused(row, col) {
-      return this.focusedCell === `${row}-${col}`;
+      return this.focusedCell === `${col}:${row}`;
     },
     loadMoreRows() {
       let maxRow = this.rows.length;
@@ -83,17 +92,16 @@ export default {
       }
     },
     setFocusedCell(row, col) {
-      this.focusedCell = `${row}-${col}`;
+      this.focusedCell = `${col}:${row}`;
       eventBus.emit("focusedCellChange", this.focusedCell);
-      console.log(this.focusedCell);
     },
 
-    isHeaderFocused(row, col) {
+    isHeaderFocused(col, row) {
       if (!this.focusedCell) return false;
-      const [focusedRow, focusedCol] = this.focusedCell.split("-");
+
+      const [focusedCol, focusedRow] = this.focusedCell.split(":");
       return (
-        (row && focusedRow === row.toString()) ||
-        (col && focusedCol === col.toString())
+        (col && focusedCol === col) || (row && focusedRow === row.toString())
       );
     },
   },

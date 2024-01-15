@@ -45,12 +45,25 @@ export default {
       return this.tabs.find((tab) => tab.id === this.activeTabId) || {};
     },
   },
+  mounted() {
+    this.loadDataFromLocalStorage();
+  },
   methods: {
     addTab() {
       this.totalTabsAdded++;
       const newTabId = this.totalTabsAdded;
       this.tabs.push({ id: newTabId, cellContents: {} });
       this.setActiveTab(newTabId);
+    },
+    loadDataFromLocalStorage() {
+      const savedData = localStorage.getItem("workbookData");
+      if (savedData) {
+        const cellContents = JSON.parse(savedData);
+        const activeTab = this.tabs.find((tab) => tab.id === this.activeTabId);
+        if (activeTab) {
+          activeTab.cellContents = cellContents;
+        }
+      }
     },
     setActiveTab(tabId) {
       this.activeTabId = tabId;
@@ -64,9 +77,12 @@ export default {
       }
     },
 
-    handleCellUpdate({ row, col, content }) {
-      this.activeTabData.cellContents[`${row}-${col}`] = content;
-      console.log(content);
+    handleCellUpdate({ col, row, content }) {
+      this.activeTabData.cellContents[`${col}${row}`] = content;
+      localStorage.setItem(
+        "workbookData",
+        JSON.stringify(this.activeTabData.cellContents)
+      );
     },
   },
 };
@@ -77,6 +93,8 @@ export default {
   margin: 0;
 }
 .main-view-wrapper {
-  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 </style>
