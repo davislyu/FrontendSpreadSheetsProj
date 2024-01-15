@@ -57,7 +57,12 @@ export default {
     eventBus.on("tabChanged", () => {
       this.focusedCell = null;
     });
+    document.addEventListener("keydown", this.handleArrowKeys);
   },
+  beforeUnmount() {
+    document.removeEventListener("keydown", this.handleArrowKeys);
+  },
+
   methods: {
     saveDataToLocalStorage() {
       localStorage.setItem("workbookData", JSON.stringify(this.cellData));
@@ -65,6 +70,50 @@ export default {
     getColumnName(col) {
       return String.fromCharCode(64 + col);
     },
+    handleArrowKeys(event) {
+      if (!this.focusedCell) return;
+
+      let [col, row] = this.focusedCell.split(":");
+      row = parseInt(row);
+
+      switch (event.key) {
+        case "ArrowLeft":
+          // Move left
+          col = this.getPreviousColumn(col);
+          break;
+        case "ArrowRight":
+          // Move right
+          col = this.getNextColumn(col);
+          break;
+        case "ArrowUp":
+          // Move up
+          row = Math.max(1, row - 1);
+          break;
+        case "ArrowDown":
+          // Move down
+          row += 1;
+          break;
+      }
+      this.setFocusedCell(row, col);
+    },
+
+    getPreviousColumn(col) {
+      const colIndex = col.charCodeAt(0) - 65; // 'A' -> 0, 'B' -> 1, etc.
+      if (colIndex > 0) {
+        return String.fromCharCode(65 + colIndex - 1); // Move to previous column
+      }
+      return col; // Stay in the same column if it's already the first one
+    },
+
+    getNextColumn(col) {
+      const colIndex = col.charCodeAt(0) - 65; // 'A' -> 0, 'B' -> 1, etc.
+      if (colIndex < this.columns - 1) {
+        return String.fromCharCode(65 + colIndex + 1); // Move to next column
+      }
+      return col; // Stay in the same column if it's already the last one
+    },
+
+    // ... other methods ...
 
     getCellContent(row, col) {
       const key = `${col}${row}`;
@@ -92,6 +141,8 @@ export default {
       }
     },
     setFocusedCell(row, col) {
+      row = Math.max(1, Math.min(this.rows.length, row));
+
       this.focusedCell = `${col}:${row}`;
       eventBus.emit("focusedCellChange", this.focusedCell);
     },

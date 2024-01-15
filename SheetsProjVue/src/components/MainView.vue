@@ -47,6 +47,10 @@ export default {
   },
   mounted() {
     this.loadDataFromLocalStorage();
+    eventBus.on("tabChanged", this.loadDataFromLocalStorage);
+  },
+  beforeUnmount() {
+    eventBus.off("tabChanged", this.loadDataFromLocalStorage);
   },
   methods: {
     addTab() {
@@ -56,13 +60,14 @@ export default {
       this.setActiveTab(newTabId);
     },
     loadDataFromLocalStorage() {
-      const savedData = localStorage.getItem("workbookData");
+      const savedData = localStorage.getItem("workbookTabsData");
       if (savedData) {
-        const cellContents = JSON.parse(savedData);
-        const activeTab = this.tabs.find((tab) => tab.id === this.activeTabId);
-        if (activeTab) {
-          activeTab.cellContents = cellContents;
-        }
+        const tabsData = JSON.parse(savedData);
+        this.tabs.forEach((tab) => {
+          if (tabsData[tab.id]) {
+            tab.cellContents = tabsData[tab.id];
+          }
+        });
       }
     },
     setActiveTab(tabId) {
@@ -79,10 +84,11 @@ export default {
 
     handleCellUpdate({ col, row, content }) {
       this.activeTabData.cellContents[`${col}${row}`] = content;
-      localStorage.setItem(
-        "workbookData",
-        JSON.stringify(this.activeTabData.cellContents)
-      );
+      const tabsData = this.tabs.reduce((acc, tab) => {
+        acc[tab.id] = tab.cellContents;
+        return acc;
+      }, {});
+      localStorage.setItem("workbookTabsData", JSON.stringify(tabsData));
     },
   },
 };
