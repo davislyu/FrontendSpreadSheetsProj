@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { eventBus } from "../eventBus";
+
 import WorkbookTabs from "./WorkbookTabs.vue";
 import Workbook from "./Workbook.vue";
 import Header from "./Header.vue";

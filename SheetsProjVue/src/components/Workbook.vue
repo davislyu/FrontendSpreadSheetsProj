@@ -1,3 +1,4 @@
+//Workbook.vue
 <template>
   <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table class="workbook-table">
@@ -78,19 +79,15 @@ export default {
 
       switch (event.key) {
         case "ArrowLeft":
-          // Move left
           col = this.getPreviousColumn(col);
           break;
         case "ArrowRight":
-          // Move right
           col = this.getNextColumn(col);
           break;
         case "ArrowUp":
-          // Move up
           row = Math.max(1, row - 1);
           break;
         case "ArrowDown":
-          // Move down
           row += 1;
           break;
       }
@@ -98,22 +95,20 @@ export default {
     },
 
     getPreviousColumn(col) {
-      const colIndex = col.charCodeAt(0) - 65; // 'A' -> 0, 'B' -> 1, etc.
+      const colIndex = col.charCodeAt(0) - 65;
       if (colIndex > 0) {
-        return String.fromCharCode(65 + colIndex - 1); // Move to previous column
+        return String.fromCharCode(65 + colIndex - 1);
       }
-      return col; // Stay in the same column if it's already the first one
+      return col;
     },
 
     getNextColumn(col) {
-      const colIndex = col.charCodeAt(0) - 65; // 'A' -> 0, 'B' -> 1, etc.
+      const colIndex = col.charCodeAt(0) - 65;
       if (colIndex < this.columns - 1) {
-        return String.fromCharCode(65 + colIndex + 1); // Move to next column
+        return String.fromCharCode(65 + colIndex + 1);
       }
-      return col; // Stay in the same column if it's already the last one
+      return col;
     },
-
-    // ... other methods ...
 
     getCellContent(row, col) {
       const key = `${col}${row}`;
