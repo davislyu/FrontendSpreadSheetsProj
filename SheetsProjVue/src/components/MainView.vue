@@ -8,6 +8,7 @@
       @tabChange="setActiveTab"
       @tabToDelete="delTab"
       @addTab="addTab"
+      @addColumn="handleAddColumn"
     />
 
     <Workbook
@@ -71,6 +72,9 @@ export default {
           }
         });
       }
+    },
+    handleAddColumn() {
+      this.columns += 1;
     },
     setActiveTab(tabId) {
       this.activeTabId = tabId;

@@ -30,12 +30,15 @@
       </button>
     </div>
     <div class="tab-settings">
-      <form action="submit">
+      <form class="FormContainer" action="submit">
         <input
           id="cell-finder-input"
           type="text"
           :placeholder="someDataProperty"
         />
+        <button @click.prevent="addNewColumn" class="add-column-button">
+          Add Column
+        </button>
       </form>
     </div>
   </div>
@@ -63,6 +66,9 @@ export default {
     addTab() {
       this.$emit("addTab");
       this.tabsActive = true;
+    },
+    addNewColumn() {
+      this.$emit("addColumn");
     },
 
     toggleTabs() {
