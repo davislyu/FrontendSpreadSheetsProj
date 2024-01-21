@@ -11,6 +11,9 @@
 <script>
 export default {
   props: ["content"],
+  mounted() {
+    this.$emit("cellMounted", this.$el, this.col, this.row);
+  },
 };
 </script>
 <style lang="scss">

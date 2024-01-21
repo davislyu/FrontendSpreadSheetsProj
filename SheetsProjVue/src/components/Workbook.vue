@@ -1,4 +1,3 @@
-//Workbook.vue
 <template>
   <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table class="workbook-table">
@@ -28,12 +27,14 @@
           class="cell-container"
           :class="{
             'cell-container-focused': isCellFocused(row, getColumnName(col)),
+            'cell-container-active': isActiveCell(row, getColumnName(col)),
           }"
         >
           <Cell
             :content="getCellContent(row, getColumnName(col))"
             @updateContent="updateCell(row, getColumnName(col), $event)"
             @focus="setFocusedCell(row, getColumnName(col))"
+            @cellMounted="cellMountedHandler($event, getColumnName(col), row)"
           />
         </td>
       </tr>
@@ -49,9 +50,9 @@ export default {
   data() {
     return {
       focusedCell: null,
+      activeCell: null,
     };
   },
-
   props: ["cellData", "rows", "columns"],
   mounted() {
     this.loadMoreRows();
@@ -63,7 +64,6 @@ export default {
   beforeUnmount() {
     document.removeEventListener("keydown", this.handleArrowKeys);
   },
-
   methods: {
     saveDataToLocalStorage() {
       localStorage.setItem("workbookData", JSON.stringify(this.cellData));
@@ -92,8 +92,8 @@ export default {
           break;
       }
       this.setFocusedCell(row, col);
+      this.setActiveCell(row, col);
     },
-
     getPreviousColumn(col) {
       const colIndex = col.charCodeAt(0) - 65;
       if (colIndex > 0) {
@@ -101,7 +101,14 @@ export default {
       }
       return col;
     },
-
+    cellMountedHandler(cellElement, col, row) {
+      if (this.isActiveCell(row, col)) {
+        const inputElement = cellElement.querySelector("input");
+        if (inputElement) {
+          inputElement.focus();
+        }
+      }
+    },
     getNextColumn(col) {
       const colIndex = col.charCodeAt(0) - 65;
       if (colIndex < this.columns - 1) {
@@ -109,32 +116,16 @@ export default {
       }
       return col;
     },
-    getColumnName(col) {
-      let columnName = "";
-      let dividend = col;
-      let modulo;
-
-      while (dividend > 0) {
-        modulo = (dividend - 1) % 26;
-        columnName = String.fromCharCode(65 + modulo) + columnName;
-        dividend = Math.floor((dividend - modulo) / 26);
-      }
-
-      return columnName;
-    },
-
-    addColumn() {
-      this.$emit("addColumn");
-    },
-
     getCellContent(row, col) {
       const key = `${col}${row}`;
       return this.cellData[key] || "";
     },
-
     updateCell(row, col, content) {
       this.$emit("cellUpdate", { col, row, content });
       this.saveDataToLocalStorage();
+    },
+    isActiveCell(row, col) {
+      return this.activeCell === `${col}:${row}`;
     },
     checkScroll() {
       const { scrollTop, scrollHeight, clientHeight } = this.$refs.workbook;
@@ -142,7 +133,6 @@ export default {
         this.loadMoreRows();
       }
     },
-
     isCellFocused(row, col) {
       return this.focusedCell === `${col}:${row}`;
     },
@@ -154,14 +144,23 @@ export default {
     },
     setFocusedCell(row, col) {
       row = Math.max(1, Math.min(this.rows.length, row));
-
       this.focusedCell = `${col}:${row}`;
       eventBus.emit("focusedCellChange", this.focusedCell);
+    },
+    setActiveCell(row, col) {
+      this.activeCell = `${col}:${row}`;
+      this.$nextTick(() => {
+        const activeCellElement = this.$refs.workbook.querySelector(
+          `.cell-container-active`
+        );
+        if (activeCellElement) {
+          activeCellElement.querySelector("input").focus();
+        }
+      });
     },
 
     isHeaderFocused(col, row) {
       if (!this.focusedCell) return false;
-
       const [focusedCol, focusedRow] = this.focusedCell.split(":");
       return (
         (col && focusedCol === col) || (row && focusedRow === row.toString())
@@ -174,5 +173,3 @@ export default {
 <style lang="scss">
 @import "../styles/Workbook.scss";
 </style>
-
- 
