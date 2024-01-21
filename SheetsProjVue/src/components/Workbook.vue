@@ -68,6 +68,12 @@ export default {
     saveDataToLocalStorage() {
       localStorage.setItem("workbookData", JSON.stringify(this.cellData));
     },
+    clearActiveCell() {
+      console.log("clearActiveCell called");
+      this.focusedCell = null;
+      this.activeCell = null;
+    },
+
     getColumnName(col) {
       return String.fromCharCode(64 + col);
     },

@@ -12,6 +12,7 @@
     />
 
     <Workbook
+      ref="workbookComponent"
       :cellData="activeTabData.cellContents"
       :rows="rows"
       :columns="columns"
@@ -51,6 +52,7 @@ export default {
   mounted() {
     this.loadDataFromLocalStorage();
     eventBus.on("tabChanged", this.loadDataFromLocalStorage);
+    eventBus.on("clearCellFocus", this.clearActiveCellFocus);
   },
   beforeUnmount() {
     eventBus.off("tabChanged", this.loadDataFromLocalStorage);
@@ -62,6 +64,14 @@ export default {
       this.tabs.push({ id: newTabId, cellContents: {} });
       this.setActiveTab(newTabId);
     },
+    clearActiveCellFocus() {
+      if (this.$refs.workbookComponent) {
+        this.$refs.workbookComponent.clearActiveCell();
+      } else {
+        console.error("Workbook component not found");
+      }
+    },
+
     loadDataFromLocalStorage() {
       const savedData = localStorage.getItem("workbookTabsData");
       if (savedData) {

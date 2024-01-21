@@ -11,6 +11,7 @@
         class="header-title-text"
         @input="adjustWidth"
         :size="inputSize"
+        @click="clearWorkbookFocus"
         ref="input"
       />
     </header>
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import { eventBus } from "../eventBus";
+
 export default {
   data() {
     return {
@@ -32,6 +35,9 @@ export default {
       let input = this.$refs.input;
       this.inputSize =
         Math.max(input.value.length, input.placeholder.length) || 10;
+    },
+    clearWorkbookFocus() {
+      eventBus.emit("clearCellFocus");
     },
   },
   mounted() {
