@@ -48,6 +48,7 @@ npm install
 npm run dev
 
 ```
-![image](https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/9cfde3c9-2c70-4ec0-ba84-b7f3f7d8a2de)
+<img src="https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/9cfde3c9-2c70-4ec0-ba84-b7f3f7d8a2de" alt="Description of Image" width="1585" height="823"/>
+
 
 
