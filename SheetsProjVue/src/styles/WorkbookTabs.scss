@@ -10,7 +10,6 @@
     align-items: center;
   }
   .tab-settings {
-    width: 100%;
     background-color: $primary--background-color;
     height: 23px;
     padding: 12px 20px;
@@ -46,6 +45,9 @@
       &:hover {
         background-color: $primary--cell-indicator-border-color;
         transition: 0.18s;
+      }
+      &:active {
+        border: 1px solid black;
       }
     }
   }
