@@ -9,7 +9,7 @@ Welcome to the Vue Spreadsheet Application project. This modern, interactive web
 ## 🚀 Features
 
 - **Multiple Tabs**: Easily manage different datasets with the ability to switch between multiple tabs.
-  ![Multiple Tabs](https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/50160462-2ac4-457b-889e-cc43f696ca82.gif)
+  ![Multiple Tabs]([https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/50160462-2ac4-457b-889e-cc43f696ca82.gif](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamN1dmZ3dGRhNGJldGR0bzdna3l2ODY1MnJ0NWoxcTd2dHg3bXVjdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q1fM7GYxQpHLopqd8l/giphy.gif))
 
 - **Editable Cells**: Click and edit any cell, offering a seamless experience akin to Excel or Google Sheets.
   ![Editable Cells](https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/bfd5ae0f-5afc-4b30-9f0f-a75628103f54.gif)
