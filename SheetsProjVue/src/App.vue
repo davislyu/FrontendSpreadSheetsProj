@@ -11,6 +11,10 @@ export default {
 };
 </script>
 <style>
+* {
+  padding: 0;
+  margin: 0;
+}
 .main {
   height: 100vh;
   overflow: hidden;
