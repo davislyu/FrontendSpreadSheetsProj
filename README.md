@@ -33,7 +33,9 @@ Welcome to the Vue Spreadsheet Application project. This modern, interactive web
 
 ## 🎨 Styling
 
-[Styling description]
+- The application boasts a clean, minimalistic design, focusing on usability and aesthetics.
+- Active cells and headers are highlighted, improving visibility and focus.
+- Intuitive UI elements, like the 'Add Tab' button, enhance user interaction.
 
 ## 🛠 Built With
 
