@@ -3,11 +3,20 @@
 .tab-wrapper {
   display: flex;
   flex-direction: column;
+  .FormContainer {
+    width: 98vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .tab-settings {
     width: 100%;
     background-color: $primary--background-color;
     height: 23px;
     padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     #cell-finder-input {
       height: 24px;
       width: 48px;
@@ -22,8 +31,21 @@
       letter-spacing: -0.037px;
       outline: none;
       margin-left: 20px;
+
       &:focus {
         border: 1px solid black;
+      }
+    }
+    .add-column-button {
+      background-color: transparent;
+      border: 1px solid $primary--cell-indicator-border-color;
+      border-radius: 4px;
+      color: #01151c;
+      cursor: pointer;
+      padding: 8px;
+      &:hover {
+        background-color: $primary--cell-indicator-border-color;
+        transition: 0.18s;
       }
     }
   }
