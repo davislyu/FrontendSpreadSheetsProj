@@ -48,12 +48,6 @@ npm install
 npm run dev
 
 ```
- ## 🎥 Screen Recordings
- 
-![Editable Cells](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcHpoazVjN2swN21pOGpramF0dmExYWZlcGR1a2ZrdnJ0aWRxenVsZyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/wOiZHH5XEggxdJg3Fg/giphy.gif)
-![Multiple Tabs](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExamN1dmZ3dGRhNGJldGR0bzdna3l2ODY1MnJ0NWoxcTd2dHg3bXVjdSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Q1fM7GYxQpHLopqd8l/giphy.gif)
-![Infinite Scrolling](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExeWdmY3k2ZnhmNWtiMmc5bW9yczh1MHpmY2ttbXB1bGRoOGlkNGM1biZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/8kJLLKHx9A2B1aSuq7/giphy.gif)
-![Keyboard Navigation](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNnAybDZ5d3J1c3RhMHpzcnBwY2J2eTd6aTAyNWRuanI5enVoeWE4ciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/jc32WAfqqiueVUOI8l/giphy.gif)
-![Local Storage](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcGwxajVtdnV1b25jZ2ljenBkZGcwbzBuOXJxejFqcmhtOGIxdW1vMCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/CKobTwQwIZMHvXm8XT/giphy.gif)
+![image](https://github.com/davislyu/FrontendSpreadSheetsProj/assets/27707434/9cfde3c9-2c70-4ec0-ba84-b7f3f7d8a2de)
 
 
