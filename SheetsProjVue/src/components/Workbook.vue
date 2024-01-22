@@ -134,14 +134,13 @@ export default {
       return col;
     },
     getCellContent(row, col) {
-      return (this.cellData[row] && this.cellData[row][col]) || "";
+      const key = `${col}${row}`;
+      return this.cellData[key] || "";
     },
 
     updateCell(row, col, content) {
-      if (!this.cellData[row]) {
-        this.cellData[row] = {};
-      }
-      this.cellData[row][col] = content;
+      this.$emit("cellUpdate", { col, row, content });
+
       this.saveDataToLocalStorage();
     },
     isActiveCell(row, col) {
