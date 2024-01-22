@@ -72,6 +72,29 @@ export default {
       }
     },
 
+    getCellContent(row, col) {
+      if (!this.activeTabData.cellContents[row]) {
+        return "";
+      }
+      return this.activeTabData.cellContents[row][col] || "";
+    },
+
+    updateCell(row, col, content) {
+      if (!this.activeTabData.cellContents[row]) {
+        this.$set(this.activeTabData.cellContents, row, {});
+      }
+      this.$set(this.activeTabData.cellContents[row], col, content);
+      this.saveDataToLocalStorage();
+    },
+
+    saveDataToLocalStorage() {
+      const tabsData = this.tabs.reduce((acc, tab) => {
+        acc[tab.id] = tab.cellContents;
+        return acc;
+      }, {});
+      localStorage.setItem("workbookTabsData", JSON.stringify(tabsData));
+    },
+
     loadDataFromLocalStorage() {
       const savedData = localStorage.getItem("workbookTabsData");
       if (savedData) {

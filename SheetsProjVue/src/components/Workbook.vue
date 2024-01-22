@@ -1,3 +1,4 @@
+//workbook.vue
 <template>
   <div ref="workbook" class="workbook" @scroll="checkScroll">
     <table class="workbook-table">
@@ -133,11 +134,14 @@ export default {
       return col;
     },
     getCellContent(row, col) {
-      const key = `${col}${row}`;
-      return this.cellData[key] || "";
+      return (this.cellData[row] && this.cellData[row][col]) || "";
     },
+
     updateCell(row, col, content) {
-      this.$emit("cellUpdate", { col, row, content });
+      if (!this.cellData[row]) {
+        this.cellData[row] = {};
+      }
+      this.cellData[row][col] = content;
       this.saveDataToLocalStorage();
     },
     isActiveCell(row, col) {
