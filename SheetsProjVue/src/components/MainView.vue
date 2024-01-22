@@ -109,14 +109,6 @@ export default {
   },
 };
 </script>
-<style>
-* {
-  padding: 0;
-  margin: 0;
-}
-.main-view-wrapper {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
+<style scoped lang="scss">
+@import "../styles/MainView.scss";
 </style>
