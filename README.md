@@ -25,8 +25,10 @@ Welcome to the Vue Spreadsheet Application project. This modern, interactive web
 
 ## 📋 How It Works
 
-[Include descriptions and possibly GIFs for each feature]
-
+- Tabs Management: You can create new tabs or switch between existing ones using the tabs bar at the top. Each tab holds a unique set of data.
+- Editing Cells: Simply click on a cell to edit its content. Your changes are saved as soon as you move to another cell or press enter.
+- Scrolling for More: When you reach the bottom of the spreadsheet, more rows will load automatically.
+- 
 ## 🎨 Styling
 
 - The application boasts a clean, minimalistic design, focusing on usability and aesthetics.
