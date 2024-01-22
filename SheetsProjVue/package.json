@@ -13,6 +13,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/vue-fontawesome": "^3.0.5",
     "g": "^2.0.1",
+    "mitt": "^3.0.1",
     "oh-vue-icons": "^1.0.0-rc3",
     "scss": "^0.2.4",
     "vue": "^3.3.11"
