@@ -4,12 +4,11 @@
 
 ## Hello there! 👋
 
-Welcome to the Vue Spreadsheet Application project. This modern, interactive web app, built using Vue.js, elevates your data management experience to new heights. It's ideal for anyone seeking a powerful yet user-friendly spreadsheet solution.
+Welcome to the Vue Spreadsheet Application project. This modern, interactive web app, built using Vue.js. It's ideal for anyone seeking a powerful yet user-friendly spreadsheet solution.
 
 ## 🚀 Features
 
 - **Multiple Tabs**: Easily manage different datasets with the ability to switch between multiple tabs.
-
 
 - **Editable Cells**: Click and edit any cell, offering a seamless experience akin to Excel or Google Sheets.
 
@@ -28,7 +27,7 @@ Welcome to the Vue Spreadsheet Application project. This modern, interactive web
 - Tabs Management: You can create new tabs or switch between existing ones using the tabs bar at the top. Each tab holds a unique set of data.
 - Editing Cells: Simply click on a cell to edit its content. Your changes are saved as soon as you move to another cell or press enter.
 - Scrolling for More: When you reach the bottom of the spreadsheet, more rows will load automatically.
-- 
+  
 ## 🎨 Styling
 
 - The application boasts a clean, minimalistic design, focusing on usability and aesthetics.
