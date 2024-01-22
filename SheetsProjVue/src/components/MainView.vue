@@ -83,6 +83,13 @@ export default {
         });
       }
     },
+    saveTabsDataToLocalStorage() {
+      const tabsData = this.tabs.reduce((acc, tab) => {
+        acc[tab.id] = tab.cellContents;
+        return acc;
+      }, {});
+      localStorage.setItem("workbookTabsData", JSON.stringify(tabsData));
+    },
     handleAddColumn() {
       this.columns += 1;
     },
@@ -98,13 +105,9 @@ export default {
       }
     },
 
-    handleCellUpdate({ col, row, content }) {
-      this.activeTabData.cellContents[`${col}${row}`] = content;
-      const tabsData = this.tabs.reduce((acc, tab) => {
-        acc[tab.id] = tab.cellContents;
-        return acc;
-      }, {});
-      localStorage.setItem("workbookTabsData", JSON.stringify(tabsData));
+    handleCellUpdate(newCellData) {
+      this.activeTabData.cellContents = newCellData;
+      this.saveTabsDataToLocalStorage();
     },
   },
 };

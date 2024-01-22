@@ -134,15 +134,26 @@ export default {
       return col;
     },
     getCellContent(row, col) {
-      const key = `${col}${row}`;
-      return this.cellData[key] || "";
+      return this.cellData[row] ? this.cellData[row][col] || "" : "";
     },
 
     updateCell(row, col, content) {
-      this.$emit("cellUpdate", { col, row, content });
+      // Check if the row already exists in cellData
+      if (!this.cellData[row]) {
+        // If not, create a new object for that row
+        this.cellData[row] = {};
+      }
 
+      // Directly set the content for the specified cell
+      this.cellData[row][col] = content;
+
+      // Emit an event with the updated cellData
+      this.$emit("cellUpdate", this.cellData);
+
+      // Save the updated data to local storage
       this.saveDataToLocalStorage();
     },
+
     isActiveCell(row, col) {
       return this.activeCell === `${col}:${row}`;
     },
