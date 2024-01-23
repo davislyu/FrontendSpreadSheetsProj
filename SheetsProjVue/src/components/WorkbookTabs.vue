@@ -34,7 +34,7 @@
         <input
           id="cell-finder-input"
           type="text"
-          :placeholder="someDataProperty"
+          :placeholder="current_active_cell"
         />
         <button @click.prevent="addNewColumn" class="add-column-button">
           Add Column
@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       tabsActive: true,
-      someDataProperty: "",
+      current_active_cell: "",
     };
   },
 
@@ -61,7 +61,7 @@ export default {
     setActiveTab(tabId) {
       this.$emit("tabChange", tabId);
       eventBus.emit("tabChanged");
-      this.someDataProperty = null;
+      this.current_active_cell = null;
     },
     addTab() {
       this.$emit("addTab");
@@ -80,7 +80,7 @@ export default {
   },
   mounted() {
     eventBus.on("focusedCellChange", (data) => {
-      this.someDataProperty = data;
+      this.current_active_cell = data;
     });
   },
   unmounted() {
