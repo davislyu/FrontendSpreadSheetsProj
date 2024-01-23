@@ -134,23 +134,22 @@ export default {
       return col;
     },
     getCellContent(row, col) {
-      return this.cellData[row] ? this.cellData[row][col] || "" : "";
+      let colNumber = col.charCodeAt(0) - 64; // Convert column letter to number A=1, B=2, etc.
+      return this.cellData[row] && this.cellData[row][colNumber.toString()]
+        ? this.cellData[row][colNumber.toString()]
+        : "";
     },
 
     updateCell(row, col, content) {
-      // Check if the row already exists in cellData
       if (!this.cellData[row]) {
-        // If not, create a new object for that row
         this.cellData[row] = {};
       }
 
-      // Directly set the content for the specified cell
-      this.cellData[row][col] = content;
+      let colNumber = col.charCodeAt(0) - 64;
+      this.cellData[row][colNumber.toString()] = content;
 
-      // Emit an event with the updated cellData
       this.$emit("cellUpdate", this.cellData);
 
-      // Save the updated data to local storage
       this.saveDataToLocalStorage();
     },
 
