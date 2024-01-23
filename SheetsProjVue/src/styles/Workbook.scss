@@ -73,8 +73,8 @@
         border: 1px solid #3e90ab68;
       }
     }
-    .cell-container-focused {
-      border: 1px solid $focused--header-border-color !important; //added the important so it will overwrite the hovered color
+    .cell-container.cell-container-focused {
+      border: 1px solid $focused--header-border-color;
     }
   }
 }
