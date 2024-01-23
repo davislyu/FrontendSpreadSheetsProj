@@ -3,13 +3,16 @@
 .tab-wrapper {
   display: flex;
   flex-direction: column;
+
+
   .FormContainer {
     width: 100%;
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
+
+
   .tab-settings {
     background-color: $primary--background-color;
     height: 23px;
@@ -17,6 +20,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+
     #cell-finder-input {
       height: 24px;
       width: 48px;
@@ -32,10 +37,13 @@
       outline: none;
       margin-left: 20px;
 
+
       &:focus {
         border: 1px solid black;
       }
     }
+
+
     .add-column-button {
       background-color: transparent;
       border: 1px solid $primary--cell-indicator-border-color;
@@ -43,16 +51,21 @@
       color: #01151c;
       cursor: pointer;
       padding: 8px;
+
+
       &:hover {
         background-color: $primary--cell-indicator-border-color;
         transition: 0.18s;
       }
+
+
       &:active {
         border: 1px solid black;
       }
     }
   }
 }
+
 
 .tab-navigation-container {
   background-color: $primary--border-color;
@@ -62,6 +75,7 @@
   height: 36px;
   width: 100%;
 
+
   .tab-icon {
     width: 16px;
     height: 16px;
@@ -70,6 +84,8 @@
       cursor: pointer;
     }
   }
+
+
   .add-tab-button {
     background-color: transparent;
     background-repeat: no-repeat;
@@ -79,19 +95,26 @@
     outline: none;
     margin-left: 12px;
   }
+
+
   .burger-icon {
     margin-left: 20px;
   }
+
+
 }
 .tab-navigation-container .active {
   color: $primary--cell-text-color;
   background-color: $primary--background-color;
 }
 
+
 .tab-navigation-list {
   list-style: none;
   display: flex;
   margin-left: 12px;
+
+
   li {
     font-size: 15px;
     justify-content: center;
@@ -102,19 +125,24 @@
     line-height: 24px;
     letter-spacing: -0.037px;
     font-family: $primary--font-family;
-
     width: 69px; //original width: 47px
     height: 24px;
     padding: 6px 16px;
     border-top-right-radius: 4px;
     border-top-left-radius: 4px;
     text-align: center;
+
+
     &:hover {
       cursor: pointer;
     }
+
+
     &:hover:not(.active) {
       background-color: rgba(255, 255, 255, 0.457);
     }
+
+
     span {
       display: flex;
       align-items: center;

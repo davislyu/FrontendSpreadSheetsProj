@@ -23,7 +23,6 @@
 
 <script>
 import { eventBus } from "../eventBus";
-
 import WorkbookTabs from "./WorkbookTabs.vue";
 import Workbook from "./Workbook.vue";
 import Header from "./Header.vue";
@@ -48,15 +47,18 @@ export default {
     activeTabData() {
       return this.tabs.find((tab) => tab.id === this.activeTabId) || {};
     },
+
   },
   mounted() {
     this.loadDataFromLocalStorage();
     eventBus.on("tabChanged", this.loadDataFromLocalStorage);
     eventBus.on("clearCellFocus", this.clearActiveCellFocus);
   },
+
   beforeUnmount() {
     eventBus.off("tabChanged", this.loadDataFromLocalStorage);
   },
+
   methods: {
     addTab() {
       this.totalTabsAdded++;
@@ -64,6 +66,7 @@ export default {
       this.tabs.push({ id: newTabId, cellContents: {} });
       this.setActiveTab(newTabId);
     },
+
     clearActiveCellFocus() {
       if (this.$refs.workbookComponent) {
         this.$refs.workbookComponent.clearActiveCell();
@@ -71,7 +74,7 @@ export default {
         console.error("Workbook component not found");
       }
     },
-
+    
     loadDataFromLocalStorage() {
       const savedData = localStorage.getItem("workbookTabsData");
       if (savedData) {
@@ -83,6 +86,7 @@ export default {
         });
       }
     },
+
     saveTabsDataToLocalStorage() {
       const tabsData = this.tabs.reduce((acc, tab) => {
         acc[tab.id] = tab.cellContents;
@@ -90,12 +94,15 @@ export default {
       }, {});
       localStorage.setItem("workbookTabsData", JSON.stringify(tabsData));
     },
+
     handleAddColumn() {
       this.columns += 1;
     },
+
     setActiveTab(tabId) {
       this.activeTabId = tabId;
     },
+    
     delTab(tabId) {
       if (this.tabs.length > 1) {
         this.tabs = this.tabs.filter((tab) => tab.id !== tabId);

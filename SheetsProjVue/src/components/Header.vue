@@ -23,27 +23,34 @@
 
 <script>
 import { eventBus } from "../eventBus";
-
 export default {
   data() {
     return {
       inputSize: 1,
     };
-  },
+  }, 
+
+
   methods: {
     adjustWidth() {
       let input = this.$refs.input;
       this.inputSize =
         Math.max(input.value.length, input.placeholder.length) || 10;
     },
+
+
     clearWorkbookFocus() {
       eventBus.emit("clearCellFocus");
     },
+
+
   },
   mounted() {
     this.adjustWidth();
   },
 };
+
+
 </script>
 
 <style lang="scss" scoped>

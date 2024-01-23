@@ -63,10 +63,12 @@ export default {
       eventBus.emit("tabChanged");
       this.current_active_cell = null;
     },
+
     addTab() {
       this.$emit("addTab");
       this.tabsActive = true;
     },
+
     addNewColumn() {
       this.$emit("addColumn");
     },
@@ -74,15 +76,18 @@ export default {
     toggleTabs() {
       this.tabsActive = !this.tabsActive;
     },
+
     tabToDelete(tabId) {
       this.$emit("tabToDelete", tabId);
     },
+
   },
   mounted() {
     eventBus.on("focusedCellChange", (data) => {
       this.current_active_cell = data;
     });
   },
+  
   unmounted() {
     eventBus.off("focusedCellChange");
   },

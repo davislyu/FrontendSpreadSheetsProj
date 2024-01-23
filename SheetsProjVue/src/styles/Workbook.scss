@@ -32,6 +32,8 @@
       justify-content: center;
       align-self: stretch;
     }
+
+
     .table-header-row {
       position: sticky;
       top: 0;
@@ -39,12 +41,15 @@
       z-index: 2;
     }
 
+
     .row-header-cell {
       position: sticky;
       left: 0;
       background-color: $primary--background-color;
       z-index: 1;
     }
+
+
     #corner-cell {
       position: sticky;
       top: 0;
@@ -52,10 +57,13 @@
       background-color: $primary--background-color;
     }
 
+
     .active-header-cell {
       background-color: $focused--header-background-color;
       border: 1px solid $focused--header-border-color;
     }
+
+
     .cell-container {
       box-sizing: border-box;
       min-width: 207px;
@@ -73,6 +81,8 @@
         border: 1px solid #3e90ab68;
       }
     }
+
+    
     .cell-container.cell-container-focused {
       border: 1px solid $focused--header-border-color;
     }

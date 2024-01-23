@@ -55,6 +55,7 @@ export default {
     };
   },
   props: ["cellData", "rows", "columns"],
+
   mounted() {
     this.loadMoreRows();
     eventBus.on("tabChanged", () => {
@@ -62,38 +63,38 @@ export default {
     });
     document.addEventListener("keydown", this.handleArrowKeys);
   },
+
   beforeUnmount() {
     document.removeEventListener("keydown", this.handleArrowKeys);
   },
+
   methods: {
     saveDataToLocalStorage() {
       localStorage.setItem("workbookData", JSON.stringify(this.cellData));
     },
+
     clearActiveCell() {
       console.log("clearActiveCell called");
       this.focusedCell = null;
       this.activeCell = null;
     },
-
+     
     getColumnName(col) {
       let columnName = "";
       let dividend = col;
       let modulo;
-
       while (dividend > 0) {
         modulo = (dividend - 1) % 26;
         columnName = String.fromCharCode(65 + modulo) + columnName;
         dividend = Math.floor((dividend - modulo) / 26);
       }
-
       return columnName;
     },
+
     handleArrowKeys(event) {
       if (!this.focusedCell) return;
-
       let [col, row] = this.focusedCell.split(":");
       row = parseInt(row);
-
       switch (event.key) {
         case "ArrowLeft":
           col = this.getPreviousColumn(col);
@@ -111,6 +112,7 @@ export default {
       this.setFocusedCell(row, col);
       this.setActiveCell(row, col);
     },
+
     getPreviousColumn(col) {
       const colIndex = col.charCodeAt(0) - 65;
       if (colIndex > 0) {
@@ -118,6 +120,7 @@ export default {
       }
       return col;
     },
+
     cellMountedHandler(cellElement, col, row) {
       if (this.isActiveCell(row, col)) {
         const inputElement = cellElement.querySelector("input");
@@ -126,6 +129,7 @@ export default {
         }
       }
     },
+
     getNextColumn(col) {
       const colIndex = col.charCodeAt(0) - 65;
       if (colIndex < this.columns - 1) {
@@ -133,6 +137,7 @@ export default {
       }
       return col;
     },
+
     getCellContent(row, col) {
       let colNumber = col.charCodeAt(0) - 64; // Convert column letter to number A=1, B=2, etc.
       return this.cellData[row] && this.cellData[row][colNumber.toString()]
@@ -156,26 +161,31 @@ export default {
     isActiveCell(row, col) {
       return this.activeCell === `${col}:${row}`;
     },
+
     checkScroll() {
       const { scrollTop, scrollHeight, clientHeight } = this.$refs.workbook;
       if (scrollTop + clientHeight >= scrollHeight - 100) {
         this.loadMoreRows();
       }
     },
+
     isCellFocused(row, col) {
       return this.focusedCell === `${col}:${row}`;
     },
+
     loadMoreRows() {
       let maxRow = this.rows.length;
       for (let i = 1; i <= 10; i++) {
         this.rows.push(maxRow + i);
       }
     },
+
     setFocusedCell(row, col) {
       row = Math.max(1, Math.min(this.rows.length, row));
       this.focusedCell = `${col}:${row}`;
       eventBus.emit("focusedCellChange", this.focusedCell);
     },
+    
     setActiveCell(row, col) {
       this.activeCell = `${col}:${row}`;
       this.$nextTick(() => {
