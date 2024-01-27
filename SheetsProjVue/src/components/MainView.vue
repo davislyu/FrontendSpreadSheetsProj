@@ -38,7 +38,7 @@ export default {
       ],
       activeTabId: 1,
       totalTabsAdded: 3,
-
+      // Initial rows and columns for the workbook
       rows: Array.from({ length: 100 }, (_, i) => i + 1),
       columns: 20,
     };
@@ -47,7 +47,6 @@ export default {
     activeTabData() {
       return this.tabs.find((tab) => tab.id === this.activeTabId) || {};
     },
-
   },
   mounted() {
     this.loadDataFromLocalStorage();
@@ -74,7 +73,11 @@ export default {
         console.error("Workbook component not found");
       }
     },
-    
+
+    /**
+     * Loads the workbook's data from local storage. Iterates over existing tabs
+     * and updates their cell contents with the saved data, if available.
+     */
     loadDataFromLocalStorage() {
       const savedData = localStorage.getItem("workbookTabsData");
       if (savedData) {
@@ -102,7 +105,12 @@ export default {
     setActiveTab(tabId) {
       this.activeTabId = tabId;
     },
-    
+
+    /**
+     * Deletes a specified tab by its ID, ensuring at least one tab remains.
+     * @param {number} tabId - The ID of the tab to delete.
+     */
+
     delTab(tabId) {
       if (this.tabs.length > 1) {
         this.tabs = this.tabs.filter((tab) => tab.id !== tabId);

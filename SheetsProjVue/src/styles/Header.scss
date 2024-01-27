@@ -8,15 +8,13 @@
   justify-content: space-between;
   font-family: $primary--font-family;
 
-
   .header-title-section {
     gap: 12px;
     display: flex;
     align-items: center;
     margin: 0px 20px;
-    .header-title-text {
 
-      
+    .header-title-text {
       border: 0.5px solid transparent;
       background-color: transparent;
       height: 30px;
@@ -29,7 +27,7 @@
       padding: 0 8px;
       width: auto;
       outline: none;
-
+      border-radius: 5px;
 
       &::placeholder {
         color: $primary--cell-text-color;
@@ -40,10 +38,10 @@
         letter-spacing: -0.1px;
       }
 
-      
       &:hover {
         cursor: pointer;
-        border: 0.5px solid black;
+        border: 0.5px solid rgba(0, 0, 0, 0.357);
+        transition: 0.1s ease-in;
         border-radius: 5px;
       }
     }

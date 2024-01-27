@@ -28,29 +28,26 @@ export default {
     return {
       inputSize: 1,
     };
-  }, 
-
+  },
 
   methods: {
+    /**
+     * Adjusts the width of the title input field based on its content length.
+     */
     adjustWidth() {
       let input = this.$refs.input;
       this.inputSize =
         Math.max(input.value.length, input.placeholder.length) || 10;
     },
 
-
     clearWorkbookFocus() {
       eventBus.emit("clearCellFocus");
     },
-
-
   },
   mounted() {
     this.adjustWidth();
   },
 };
-
-
 </script>
 
 <style lang="scss" scoped>

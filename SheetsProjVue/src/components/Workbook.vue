@@ -65,10 +65,14 @@ export default {
   },
 
   beforeUnmount() {
+    // Clean up event listeners when the component is destroyed
     document.removeEventListener("keydown", this.handleArrowKeys);
   },
 
   methods: {
+    /**
+     * Save the current state of the cell data to local storage.
+     */
     saveDataToLocalStorage() {
       localStorage.setItem("workbookData", JSON.stringify(this.cellData));
     },
@@ -78,7 +82,13 @@ export default {
       this.focusedCell = null;
       this.activeCell = null;
     },
-     
+
+    /**
+     * Generates a column name from its numerical index (e.g., 1 -> A, 27 -> AA).
+     * @param {number} col - The column index.
+     * @returns {string} The column name.
+     */
+
     getColumnName(col) {
       let columnName = "";
       let dividend = col;
@@ -90,6 +100,11 @@ export default {
       }
       return columnName;
     },
+
+    /**
+     * Handles arrow key navigation for cell focus within the workbook.
+     * @param {Object} event - The keydown event object.
+     */
 
     handleArrowKeys(event) {
       if (!this.focusedCell) return;
@@ -138,6 +153,12 @@ export default {
       return col;
     },
 
+    /**
+     * Fetches the content of a cell based on its row and column.
+     * @param {number} row - The row number.
+     * @param {string} col - The column letter.
+     * @returns {string} The content of the cell.
+     */
     getCellContent(row, col) {
       let colNumber = col.charCodeAt(0) - 64; // Convert column letter to number A=1, B=2, etc.
       return this.cellData[row] && this.cellData[row][colNumber.toString()]
@@ -145,11 +166,17 @@ export default {
         : "";
     },
 
+    /**
+     * Updates the content of a cell and emits an update event.
+     * @param {number} row - The row of the cell.
+     * @param {string} col - The column of the cell.
+     * @param {string} content - The new content for the cell.
+     */
+
     updateCell(row, col, content) {
       if (!this.cellData[row]) {
         this.cellData[row] = {};
       }
-
       let colNumber = col.charCodeAt(0) - 64;
       this.cellData[row][colNumber.toString()] = content;
 
@@ -185,7 +212,7 @@ export default {
       this.focusedCell = `${col}:${row}`;
       eventBus.emit("focusedCellChange", this.focusedCell);
     },
-    
+
     setActiveCell(row, col) {
       this.activeCell = `${col}:${row}`;
       this.$nextTick(() => {
