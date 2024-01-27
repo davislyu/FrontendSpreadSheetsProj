@@ -80,14 +80,13 @@ export default {
     tabToDelete(tabId) {
       this.$emit("tabToDelete", tabId);
     },
-
   },
   mounted() {
     eventBus.on("focusedCellChange", (data) => {
       this.current_active_cell = data;
     });
   },
-  
+
   unmounted() {
     eventBus.off("focusedCellChange");
   },
@@ -95,18 +94,4 @@ export default {
 </script>
 <style scoped lang="scss">
 @import "../styles/WorkbookTabs.scss";
-.slide-fade-enter-active {
-  transition: all 0.15s ease-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.15s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter-from,
-.slide-fade-leave-to {
-  transform: translateY(20px); //  transform: translateX(-20px);
-
-  opacity: 0;
-}
 </style>
