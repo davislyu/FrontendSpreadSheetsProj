@@ -7,7 +7,7 @@
       </i>
       <input
         type="text"
-        placeholder="United Tabular Sheet"
+        placeholder="Untitled Tabular Sheet"
         class="header-title-text"
         @input="adjustWidth"
         :size="inputSize"
