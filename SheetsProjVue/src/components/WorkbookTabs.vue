@@ -31,11 +31,7 @@
     </div>
     <div class="tab-settings">
       <form class="FormContainer" action="submit">
-        <input
-          id="cell-finder-input"
-          type="text"
-          :placeholder="current_active_cell"
-        />
+        <p id="cell-finder-input">{{ current_active_cell }}</p>
         <button @click.prevent="addNewColumn" class="add-column-button">
           Add Column
         </button>
