@@ -33,14 +33,12 @@
       align-self: stretch;
     }
 
-
     .table-header-row {
       position: sticky;
       top: 0;
       background-color: $primary--background-color;
       z-index: 2;
     }
-
 
     .row-header-cell {
       position: sticky;
@@ -49,20 +47,17 @@
       z-index: 1;
     }
 
-
     #corner-cell {
-      position: sticky;
+      // position: sticky;
       top: 0;
       left: 0;
       background-color: $primary--background-color;
     }
 
-
     .active-header-cell {
       background-color: $focused--header-background-color;
       border: 1px solid $focused--header-border-color;
     }
-
 
     .cell-container {
       box-sizing: border-box;
@@ -82,7 +77,6 @@
       }
     }
 
-    
     .cell-container.cell-container-focused {
       border: 1px solid $focused--header-border-color;
     }
