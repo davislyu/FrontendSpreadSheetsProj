@@ -63,6 +63,8 @@
   font-size: 15px;
   height: 36px;
   width: 100%;
+  overflow-x: auto; // Enables horizontal scrolling
+  -webkit-overflow-scrolling: touch; // Improves scrolling on iOS devices
 
   .tab-icon {
     width: 16px;
@@ -81,6 +83,7 @@
     overflow: hidden;
     outline: none;
     margin-left: 12px;
+    flex: 0 0 auto; // Prevent the button from growing, but allow it to shrink if needed
   }
 
   .burger-icon {
@@ -110,11 +113,15 @@
   list-style: none;
   display: flex;
   margin-left: 12px;
+  flex-wrap: nowrap; // Prevents items from wrapping
+  white-space: nowrap; // Prevents individual items from wrapping
+  padding: 0;
+  list-style-type: none; // Removes default list styling
 
   li {
     font-size: 15px;
     justify-content: center;
-    display: flex;
+    display: flex; // Optional based on your design, but helps with alignment
     color: $primary--header-text-color;
     font-style: normal;
     font-weight: 400;
